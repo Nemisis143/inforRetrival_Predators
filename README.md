@@ -1,16 +1,17 @@
 # inforRetrival_Predators
 
-Web Graph: https://drive.google.com/file/d/1yOCeXkrUnB2lyMS--Km4rczLhFg3VKR8/view?usp=share_link
+Web Graph: https://drive.google.com/file/d/13VJYJ4drLk54Za74AvfaVtwHPvKDA_qE/view?usp=sharing
 
-JSON of Webpages Crawled: https://drive.google.com/file/d/1-F1Pv892oDt5z4NgFRBWBlg1PNh0tbfW/view?usp=share_link
+URL Mapping: https://drive.google.com/file/d/1C0cxvmqMFH87XbPd16V4DG_x9J2ws2KQ/view?usp=sharing
 
-Webpages Crawled: https://drive.google.com/file/d/19IbWyjlqOd3nqOefUAZOQ5Cv-TQvmwaS/view?usp=share_link
+Web Pages: https://drive.google.com/file/d/1arqxWV-DBgAnU7wwSOtjZLYzfkIUOiPD/view?usp=sharing
+
+Checkpoint: https://drive.google.com/file/d/14lBCjABIphSzv1bsXV0uwoNtsLfc6abm/view?usp=sharing
 
 Crawler Analysis:
 
-1. Toatl Webpages Crawled: 100004
-2. Empty files: 79
-3. Small/Junk Files (<100 bytes): 1962
-4. Total Graph Edges: 14372163
-5. Unique Source URLs in Graph: 96690
-6. Corrupt/Invalid Lines: 0
+1. Toatl Webpages Crawled: 100,004
+2. Empty/Junk Files (<100 bytes): 4014
+3. Total Graph Edges: 18,866,356
+4. Unique Source URLs in Graph: 96,844
+5. Graph Coverage: 96.84% (Sources vs Pages)
