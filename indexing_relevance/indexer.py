@@ -137,22 +137,22 @@ class PredatorIndexer:
 if __name__ == "__main__":
     # Paths
     PAGES_PATH = os.path.join('data', 'pages')
-    MAPPING_PATH = os.path.join('data', 'url_mapping.jsonl') # Update this filename if needed
+    MAPPING_PATH = os.path.join('data', 'url_mapping.jsonl')
     SCORES_PATH = 'link_analysis_scores.pkl'
     
-    niki_engine = PredatorIndexer(PAGES_PATH)
+    search_engine = PredatorIndexer(PAGES_PATH)
     
     # Run/Load Index
-    niki_engine.run_incremental_indexing()
+    search_engine.run_incremental_indexing()
     
     # Load Fusion Data
-    niki_engine.load_mapping(MAPPING_PATH)
-    niki_engine.load_link_scores(SCORES_PATH)
+    search_engine.load_mapping(MAPPING_PATH)
+    search_engine.load_link_scores(SCORES_PATH)
     
     # Final Test
     query = "lion"
     print(f"\n--- Fused Search Results for: '{query}' ---")
-    results = niki_engine.fused_search(query)
+    results = search_engine.fused_search(query)
     
     for i, res in enumerate(results, 1):
         print(f"{i}. {res['url']}")

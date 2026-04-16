@@ -42,10 +42,10 @@ class PredatorLinkAnalyzer:
             sink_sum = sum(scores[node] for node in self.nodes if not self.out_links[node])
             
             for node in self.nodes:
-                # 1. Start with the damping factor (the "random jump")
+                # 1. Start with the damping factor 
                 rank = (1.0 - damping) / N
                 
-                # 2. Add the sink distribution (dangling nodes)
+                # 2. Add the sink distribution 
                 rank += damping * (sink_sum / N)
                 
                 # 3. Add scores from pages that link TO this node
@@ -115,8 +115,35 @@ if __name__ == "__main__":
     analyzer.calculate_hits()
     analyzer.save_all_scores()
 
-    # Quick Top 5 PageRank check
+    # Print summary statistics
+   
+    print("--- GRAPH STATISTICS ---")
+    
+    print(f"Total Nodes: {len(analyzer.nodes)}")
+    
+    total_edges = sum(len(dests) for dests in analyzer.out_links.values())
+    print(f"Total Links (Edges): {total_edges}")
+    
+    if analyzer.nodes:
+        max_in_node = max(analyzer.nodes, key=lambda n: len(analyzer.in_links[n]))
+        print(f"Largest In-degree: {len(analyzer.in_links[max_in_node])} links (Node: {max_in_node})")
+        
+        max_out_node = max(analyzer.nodes, key=lambda n: len(analyzer.out_links[n]))
+        print(f"Largest Out-degree: {len(analyzer.out_links[max_out_node])} links (Node: {max_out_node})")
+
+    # Print top PageRank scores
+    print("\n--- Top 5 Pages by PageRank ---")
     top_pr = sorted(analyzer.pagerank_scores.items(), key=lambda x: x[1], reverse=True)[:5]
-    print("\nTop 5 Pages by PageRank:")
     for url, score in top_pr:
+        print(f"{score:.6f} - {url}")
+
+    # Print top HITS scores
+    print("\n--- Top 5 Authorities (HITS) ---")
+    top_auths = sorted(analyzer.authority_scores.items(), key=lambda x: x[1], reverse=True)[:5]
+    for url, score in top_auths: 
+        print(f"{score:.6f} - {url}")
+
+    print("\n--- Top 5 Hubs (HITS) ---")
+    top_hubs = sorted(analyzer.hub_scores.items(), key=lambda x: x[1], reverse=True)[:5]
+    for url, score in top_hubs: 
         print(f"{score:.6f} - {url}")
