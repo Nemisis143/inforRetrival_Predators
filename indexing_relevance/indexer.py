@@ -97,7 +97,20 @@ class PredatorIndexer:
 
         self.doc_count = len(self.processed_files)
         self.save_to_disk()
-
+    def get_doc_vectors(self):
+        """Generates TF-IDF document vectors for the clustering module (Praneeth)"""
+        doc_vectors = defaultdict(dict)
+        N = self.doc_count
+        for term, postings in self.index.items():
+            df = len(postings)
+            idf = math.log10(N / df) if df > 0 else 0
+            for doc_id, freq in postings.items():
+                tf = 1 + math.log10(freq)
+                # Maps back to the actual URL if possible
+                url = self.url_map.get(doc_id, doc_id) 
+                doc_vectors[url][term] = tf * idf
+        return doc_vectors
+    
     # This method combines TF-IDF and PageRank for final ranking of search results.
     def fused_search(self, query, top_n=10):
         """Combines TF-IDF and PageRank for final ranking"""
