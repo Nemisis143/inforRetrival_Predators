@@ -1,0 +1,73 @@
+# Rocchio Algorithm Test Queries (20)
+1. African Lion cooperative hunting strategies in the Serengeti
+2. Great White Shark seasonal migration patterns to Guadalupe Island
+3. Bengal Tiger habitat loss due to deforestation in the Sundarbans
+4. Predators
+5. Apex predators
+6. Marine predators
+7. Komodo Dragon venom hemotoxic mechanism and bacteria
+8. Saltwater Crocodile territorial disputes during mating season
+9. Carnivorous mammals
+10. Top predators in rainforest ecosystems
+11. Killer Whale matrilineal social structure in resident pods
+12. Predatory birds
+13. King Cobra defensive venom yield per strike
+14. Peregrine Falcon aerodynamic diving velocity adaptations
+15. Terrestrial apex predators
+16. Box Jellyfish Chironex fleckeri sting symptoms and antivenom
+17. Carnivores
+18. Harpy Eagle prey selection focusing on arboreal mammals
+19. Jaguar rosette camouflage effectiveness in the Amazon
+20. Predator-prey population dynamics
+
+# Cluster-based Expansion Queries (50)
+1. Apex predators in Australia
+2. Marine predator-prey relationships
+3. Nocturnal hunters in the Amazon
+4. Tundra ecosystem food chain
+5. Deep sea bioluminescent predators
+6. Raptors of North America
+7. Big cats of the Serengeti
+8. Venomous snakes of Southeast Asia
+9. Cooperative hunting in mammals
+10. Scavengers of the African savanna
+11. Ambush predators in coral reefs
+12. Evolution of predatory teeth
+13. Insectivorous plants mechanism
+14. Arachnid silk production
+15. Cephalopod camouflage techniques
+16. Polar region survival strategies
+17. Desert predators and water conservation
+18. Urban wildlife predatory behavior
+19. Invasive predatory species impact
+20. Keystone species in deciduous forests
+21. Migration of apex predators
+22. Parental care in predatory birds
+23. Sensory adaptations of sharks
+24. Thermoregulation in reptiles
+25. Pack vs solitary hunting pros and cons
+26. Impact of overfishing on sharks
+27. Reintroduction of wolves in Yellowstone
+28. Human-wildlife conflict with tigers
+29. Illegal poaching of big cats
+30. Echolocation in marine predators
+31. Cryptic coloration in insects
+32. Pheromone tracking in wolves
+33. Juvenile predator mortality rates
+34. Effect of pesticides on birds of prey
+35. Scavenging behavior in bears
+36. Territoriality in crocodiles
+37. Speed of the sailfish
+38. Hunting techniques of the leopard
+39. Diet of the giant squid
+40. Predatory behavior of the praying mantis
+41. Social hierarchy in lion prides
+42. Role of predators in population control
+43. Fossil evidence of prehistoric predators
+44. Bite force of the hippopotamus
+45. Intelligence of the octopus
+46. Bioluminescence in anglerfish
+47. Habitat of the lynx
+48. Survival of the fittest in nature
+49. Defensive mechanisms of prey
+50. Apex predators in the Antarctic
