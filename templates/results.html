@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+        h3 {
+            color: #333;
+        }
+        ul {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Results for: "{{ query }}"</h2>
+
+<div class="section">
+<h3>Vector Space Model</h3>
+<ul>
+{% for r in vector %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="section">
+<h3>PageRank</h3>
+<ul>
+{% for r in pagerank %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="section">
+<h3>HITS</h3>
+<ul>
+{% for r in hits %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="section">
+<h3>Clustering</h3>
+{% for cluster, items in clusters.items() %}
+<b>{{ cluster }}</b>
+<ul>
+{% for item in items %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+{% endfor %}
+</div>
+
+<div class="section">
+<h3>Query Expansion</h3>
+<p><b>Expanded Query:</b> {{ expanded_query }}</p>
+<ul>
+{% for r in expanded_results %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="section">
+<h3>Google Results</h3>
+<ul>
+{% for r in google %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="section">
+<h3>Bing Results</h3>
+<ul>
+{% for r in bing %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<a href="/">⬅ Back</a>
+
+</body>
+</html>
