@@ -104,10 +104,19 @@ class PredatorIndexer:
         
         final_results = []
         num_query_terms = len(set(query_terms))
+        seen_urls = set() # <--- ADDED: This keeps track of what we've already shown
         
         for doc_id, tf_score in tfidf_scores.items():
-            url = self.url_map.get(doc_id, "").lower()
-            pr_score = self.pagerank.get(url, 0)
+            # Get original URL to show on the UI, and a clean lowercase one for tracking
+            original_url = self.url_map.get(doc_id, doc_id)
+            clean_url = original_url.lower().strip()
+            
+            # <--- ADDED: If we have seen this exact URL already, skip to the next one!
+            if clean_url in seen_urls:
+                continue
+            seen_urls.add(clean_url)
+            
+            pr_score = self.pagerank.get(clean_url, 0)
             
             # EXPONENTIAL COORDINATION FACTOR
             coord_factor = (len(coordination[doc_id]) / num_query_terms) ** 4
@@ -115,20 +124,19 @@ class PredatorIndexer:
             # DEEP-LINK BOOSTING & NOISE FILTERING
             url_weight = 1.0
             
-            
             # 2. Penalty for Homepages (too broad)
-            if url.count("/") <= 3: # e.g., http://fnai.org/ or http://fnai.org/home
+            if clean_url.count("/") <= 3: # e.g., http://fnai.org/ or http://fnai.org/home
                 url_weight *= 0.3
                 
             # 3. Boost for "Deep" content pages
-            if url.count("/") >= 5: # e.g., http://fnai.org/species/animals/panther.php
+            if clean_url.count("/") >= 5: # e.g., http://fnai.org/species/animals/panther.php
                 url_weight *= 2.0
             
             total_score = (tf_score + (pr_score * 1000)) * coord_factor * url_weight
             
             if total_score > 0:
                 final_results.append({
-                    "url": self.url_map.get(doc_id, doc_id),
+                    "url": original_url,  # Keep the original casing for Khushi's UI
                     "score": total_score,
                     "tf_idf": tf_score,
                     "coordination": coord_factor,
