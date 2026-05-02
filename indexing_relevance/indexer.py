@@ -31,19 +31,21 @@ class PredatorIndexer:
         self.doc_count = 0 
         self.url_map = {}  # page_id.txt -> URL
         self.pagerank = {} # URL -> score
-        self.doc_lengths = {} 
         self.stopwords = {"the", "a", "an", "and", "or", "but", "is", "in", "on", "at", "to", "for", "with"}
 
     def load_mapping(self, mapping_path):
+        """Loads the JSONL mapping file provided by Sandeep"""
         print("Loading ID-to-URL mapping...")
         if os.path.exists(mapping_path):
             with open(mapping_path, 'r') as f:
                 for line in f:
                     data = json.loads(line)
+                    # Maps "page_1.txt" to its URL
                     self.url_map[f"page_{data['id']}.txt"] = data['url']
         print(f"Mapped {len(self.url_map)} file IDs to URLs.")
 
     def load_link_scores(self, scores_path):
+        """Loads scores from link_analysis.py"""
         print("Loading PageRank scores...")
         if os.path.exists(scores_path):
             with open(scores_path, 'rb') as f:
@@ -55,11 +57,11 @@ class PredatorIndexer:
         data_to_save = {
             'index': {k: dict(v) for k, v in self.index.items()},
             'processed': self.processed_files,
-            'doc_count': len(self.processed_files),
-            'doc_lengths': self.doc_lengths
+            'doc_count': len(self.processed_files)
         }
         with open(self.index_file, 'wb') as f:
             pickle.dump(data_to_save, f)
+        print(f"Index successfully saved to {self.index_file}")
 
     def load_from_disk(self):
         if os.path.exists(self.index_file):
@@ -69,70 +71,89 @@ class PredatorIndexer:
                                          {k: defaultdict(int, v) for k, v in data['index'].items()})
                 self.processed_files = data['processed']
                 self.doc_count = data.get('doc_count', len(self.processed_files))
-                self.doc_lengths = data.get('doc_lengths', {})
-            
-            if not self.doc_lengths and self.index:
-                print("One-time optimization: Calculating document lengths...")
-                for term, postings in self.index.items():
-                    for doc_id, freq in postings.items():
-                        self.doc_lengths[doc_id] = self.doc_lengths.get(doc_id, 0) + freq
             print(f"Loaded existing index with {len(self.processed_files)} files.")
 
+    def run_incremental_indexing(self):
+        self.load_from_disk()
+        all_new_files = []
+        for root, _, files in os.walk(self.pages_dir):
+            for file in files:
+                if file not in self.processed_files:
+                    all_new_files.append((os.path.join(root, file), self.stopwords))
+
+        if not all_new_files:
+            print("No new files to add.")
+            return
+
+        print(f"Starting parallel indexing of {len(all_new_files)} files...")
+        with ProcessPoolExecutor(max_workers=8) as executor:
+            results = list(executor.map(process_single_file, all_new_files))
+
+        for doc_id, local_idx in results:
+            if doc_id:
+                self.processed_files.add(doc_id)
+                for word, count in local_idx.items():
+                    self.index[word][doc_id] = count
+
+        self.doc_count = len(self.processed_files)
+        self.save_to_disk()
+
+    # This method combines TF-IDF and PageRank for final ranking of search results.
     def fused_search(self, query, top_n=10):
-        """Combines Length-Normalized TF-IDF, PageRank, and Deep-Link Boosting"""
-        raw_query_terms = re.findall(r'\b[a-z]{3,}\b', query.lower())
-        query_terms = [t for t in raw_query_terms if t not in self.stopwords]
-        if not query_terms: query_terms = raw_query_terms
-            
+        """Combines TF-IDF and PageRank for final ranking"""
+        query_terms = re.findall(r'\b[a-z]{3,}\b', query.lower())
         tfidf_scores = defaultdict(float)
-        coordination = defaultdict(set)
         N = self.doc_count
-        avg_doc_len = sum(self.doc_lengths.values()) / N if self.doc_lengths else 1000
         
-        for i, term in enumerate(query_terms):
+        # 1. Calculate TF-IDF component
+        for term in query_terms:
             if term in self.index:
                 df = len(self.index[term])
                 idf = math.log10(N / df) if df > 0 else 0
-                w_q = idf * (5.0 if i < 2 else 1.0)
-                
                 for doc_id, freq in self.index[term].items():
-                    doc_len = self.doc_lengths.get(doc_id, avg_doc_len)
-                    norm_factor = 0.1 + 0.9 * (doc_len / avg_doc_len)
-                    tf_d = (freq / norm_factor)
-                    tfidf_scores[doc_id] += (w_q * tf_d)
-                    coordination[doc_id].add(term)
+                    tf = 1 + math.log10(freq)
+                    tfidf_scores[doc_id] += (tf * idf)
         
+        # 2. Add PageRank component (The Fusion)
         final_results = []
-        num_query_terms = len(set(query_terms))
-        
         for doc_id, tf_score in tfidf_scores.items():
-            url = self.url_map.get(doc_id, "").lower()
+            url = self.url_map.get(doc_id)
             pr_score = self.pagerank.get(url, 0)
             
-            # EXPONENTIAL COORDINATION FACTOR
-            coord_factor = (len(coordination[doc_id]) / num_query_terms) ** 4
+            # Weighting: TF-IDF + (PageRank * weight)
+            # We use a weight of 1000 because PR values are tiny decimals
+            total_score = tf_score + (pr_score * 1000)
             
-            # DEEP-LINK BOOSTING & NOISE FILTERING
-            url_weight = 1.0
-            
-            
-            # 2. Penalty for Homepages (too broad)
-            if url.count("/") <= 3: # e.g., http://fnai.org/ or http://fnai.org/home
-                url_weight *= 0.3
-                
-            # 3. Boost for "Deep" content pages
-            if url.count("/") >= 5: # e.g., http://fnai.org/species/animals/panther.php
-                url_weight *= 2.0
-            
-            total_score = (tf_score + (pr_score * 1000)) * coord_factor * url_weight
-            
-            if total_score > 0:
-                final_results.append({
-                    "url": self.url_map.get(doc_id, doc_id),
-                    "score": total_score,
-                    "tf_idf": tf_score,
-                    "coordination": coord_factor,
-                    "page_rank": pr_score
-                })
+            final_results.append({
+                "url": url if url else doc_id,
+                "score": total_score,
+                "tf_idf": tf_score,
+                "page_rank": pr_score
+            })
         
         return sorted(final_results, key=lambda x: x['score'], reverse=True)[:top_n]
+
+# Example usage
+if __name__ == "__main__":
+    # Paths
+    PAGES_PATH = os.path.join('data', 'pages')
+    MAPPING_PATH = os.path.join('data', 'url_mapping.jsonl') # Update this filename if needed
+    SCORES_PATH = 'link_analysis_scores.pkl'
+    
+    niki_engine = PredatorIndexer(PAGES_PATH)
+    
+    # Run/Load Index
+    niki_engine.run_incremental_indexing()
+    
+    # Load Fusion Data
+    niki_engine.load_mapping(MAPPING_PATH)
+    niki_engine.load_link_scores(SCORES_PATH)
+    
+    # Final Test
+    query = "lion"
+    print(f"\n--- Fused Search Results for: '{query}' ---")
+    results = niki_engine.fused_search(query)
+    
+    for i, res in enumerate(results, 1):
+        print(f"{i}. {res['url']}")
+        print(f"   [Final Score: {res['score']:.4f}] (TF-IDF: {res['tf_idf']:.2f}, PR: {res['page_rank']:.6f})")

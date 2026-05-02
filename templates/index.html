@@ -1,0 +1,535 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>My Search Engine</title>
+</head>
+<body>
+
+<h1>Search Engine</h1>
+
+<input type="text" id="query" placeholder="Enter your query">
+<button onclick="search()">Search</button>
+
+<hr>
+
+<h2>Our Results</h2>
+<div id="our_results"></div>
+
+<h2>Cluster Results</h2>
+<div id="cluster_results"></div>
+
+<h2>Expanded Query Results</h2>
+<div id="expanded_results"></div>
+
+<h2>Google Results</h2>
+<iframe id="google-iframe" width="100%" height="600px" style="border:none;"></iframe>
+
+<h2>Bing Results</h2>
+<iframe id="bing-iframe" width="100%" height="600px" style="border:none;"></iframe>
+
+<script>
+function search() {
+    let q = document.getElementById("query").value;
+
+    // iframes - no API needed
+    document.getElementById("google-iframe").src = 
+        `https://www.google.com/search?q=${encodeURIComponent(q)}&igu=1`;
+    document.getElementById("bing-iframe").src = 
+        `https://www.bing.com/search?q=${encodeURIComponent(q)}`;
+
+    // internal results
+    fetch("/search", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({query: q})
+    })
+    .then(res => res.json())
+    .then(data => {
+        display("our_results", data.our_results);
+        display("cluster_results", data.cluster_results);
+        display("expanded_results", data.expanded_results);
+    });
+}
+
+function display(id, results) {
+    let div = document.getElementById(id);
+    div.innerHTML = "";
+    results.forEach(r => {
+        div.innerHTML += `<p><a href="${r.link}" target="_blank">${r.title}</a></p>`;
+    });
+}
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CS 6322 Search Engine</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0f0f0f;
+    --surface:   #181818;
+    --border:    #2a2a2a;
+    --accent:    #c8f135;
+    --accent2:   #5eead4;
+    --text:      #e8e8e8;
+    --muted:     #666;
+    --link:      #6ea8fe;
+    --radius:    8px;
+    --mono:      'DM Mono', monospace;
+    --sans:      'DM Sans', sans-serif;
+  }
+
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); }
+
+  /* ── Top bar ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .topbar-brand {
+    font-family: var(--mono); font-size: 13px; color: var(--accent);
+    white-space: nowrap; letter-spacing: .04em;
+  }
+  .search-row {
+    display: flex; align-items: center; gap: 10px; flex: 1;
+  }
+  .search-row input {
+    flex: 1; background: var(--surface); border: 1px solid var(--border);
+    color: var(--text); font-family: var(--sans); font-size: 14px;
+    padding: 9px 14px; border-radius: var(--radius); outline: none;
+    transition: border-color .15s;
+  }
+  .search-row input:focus { border-color: var(--accent); }
+  .search-row button {
+    background: var(--accent); color: #0f0f0f; border: none;
+    font-family: var(--sans); font-weight: 600; font-size: 13px;
+    padding: 9px 22px; border-radius: var(--radius); cursor: pointer;
+    transition: opacity .15s;
+  }
+  .search-row button:hover { opacity: .85; }
+
+  /* ── 3-column grid ── */
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    height: calc(100vh - 57px);
+  }
+  .col {
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .col:last-child { border-right: none; }
+
+  .col-header {
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+    color: var(--muted); text-transform: uppercase;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .col-header .col-title { color: var(--text); font-size: 12px; }
+
+  /* ── Left column: our engine ── */
+  .left-panel { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+
+  .controls {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .controls-section { margin-bottom: 14px; }
+  .controls-section:last-child { margin-bottom: 0; }
+  .controls-label {
+    font-size: 10px; font-family: var(--mono); color: var(--muted);
+    text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px;
+  }
+  .radio-group { display: flex; flex-wrap: wrap; gap: 8px; }
+  .radio-group label {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 12px; color: var(--text); cursor: pointer;
+  }
+  .radio-group input[type=radio] { accent-color: var(--accent); }
+
+  .reset-btn {
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
+    padding: 4px 10px; border-radius: 4px; cursor: pointer;
+    transition: border-color .15s, color .15s;
+  }
+  .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .results-scroll {
+    flex: 1; overflow-y: auto; padding: 14px 18px;
+  }
+  .results-scroll::-webkit-scrollbar { width: 4px; }
+  .results-scroll::-webkit-scrollbar-track { background: transparent; }
+  .results-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .result-item { margin-bottom: 20px; }
+  .result-item a {
+    color: var(--link); font-size: 14px; font-weight: 500;
+    text-decoration: none; display: block; margin-bottom: 2px;
+    line-height: 1.4;
+  }
+  .result-item a:hover { text-decoration: underline; }
+  .result-url {
+    font-size: 11px; color: var(--accent2); font-family: var(--mono);
+    margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .result-snippet { font-size: 12px; color: #999; line-height: 1.5; }
+  .result-score {
+    display: inline-block; margin-top: 4px;
+    font-family: var(--mono); font-size: 10px; color: var(--accent);
+    background: rgba(200,241,53,.08); padding: 1px 6px; border-radius: 3px;
+  }
+
+  /* ── Tabs for left column ── */
+  .tabs {
+    display: flex; border-bottom: 1px solid var(--border);
+    flex-shrink: 0; padding: 0 18px;
+  }
+  .tab-btn {
+    background: none; border: none; color: var(--muted);
+    font-family: var(--sans); font-size: 12px; font-weight: 500;
+    padding: 10px 12px; cursor: pointer; border-bottom: 2px solid transparent;
+    margin-bottom: -1px; transition: color .15s, border-color .15s;
+  }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* cluster chips */
+  .cluster-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .chip {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 12px; font-size: 11px; cursor: pointer;
+    transition: border-color .15s, color .15s;
+  }
+  .chip:hover, .chip.active { border-color: var(--accent2); color: var(--accent2); }
+  .chip-count { color: var(--muted); margin-left: 4px; font-family: var(--mono); }
+
+  /* expanded query display */
+  .expanded-label {
+    font-family: var(--mono); font-size: 11px; color: var(--accent2);
+    background: rgba(94,234,212,.07); border: 1px solid rgba(94,234,212,.2);
+    border-radius: var(--radius); padding: 8px 12px; margin-bottom: 12px;
+  }
+  .expanded-label span { color: var(--muted); margin-right: 6px; }
+
+  /* ── External iframes ── */
+  .iframe-col { flex: 1; overflow: hidden; position: relative; }
+  .iframe-col iframe {
+    width: 100%; height: 100%; border: none; display: block;
+  }
+  .iframe-fallback {
+    display: none; flex-direction: column; align-items: center;
+    justify-content: center; height: 100%; gap: 12px; padding: 24px; text-align: center;
+  }
+  .iframe-fallback.visible { display: flex; }
+  .fallback-icon { font-size: 32px; }
+  .fallback-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .open-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--text); font-size: 12px; font-family: var(--sans);
+    padding: 8px 16px; border-radius: var(--radius); text-decoration: none;
+    transition: border-color .15s;
+  }
+  .open-btn:hover { border-color: var(--accent); }
+
+  /* empty / loading states */
+  .state-msg {
+    padding: 24px 0; text-align: center;
+    font-size: 12px; color: var(--muted); font-family: var(--mono);
+  }
+  .dot-pulse::after {
+    content: ''; animation: dots 1.2s infinite; display: inline-block;
+  }
+  @keyframes dots {
+    0%   { content: '.'; }
+    33%  { content: '..'; }
+    66%  { content: '...'; }
+  }
+
+  /* Google brand color for header dot */
+  .g-dot { color: #4285f4; }
+  .b-dot { color: #00809d; }
+</style>
+</head>
+<body>
+
+<!-- ── Top bar ── -->
+<div class="topbar">
+  <div class="topbar-brand">CS6322 //</div>
+  <div class="search-row">
+    <input type="text" id="query-input" placeholder="Enter search query…" />
+    <button onclick="runSearch()">Search</button>
+  </div>
+</div>
+
+<!-- ── 3 columns ── -->
+<div class="columns">
+
+  <!-- LEFT: Our Engine -->
+  <div class="col">
+    <div class="col-header">
+      <span class="col-title">Our Search Engine</span>
+      <button class="reset-btn" onclick="resetAll()">Reset Options</button>
+    </div>
+
+    <div class="left-panel">
+      <!-- Controls -->
+      <div class="controls">
+        <div class="controls-section">
+          <div class="controls-label">Relevance Model Options</div>
+          <div class="radio-group">
+            <label><input type="radio" name="model" value="vsm" checked> VSM</label>
+            <label><input type="radio" name="model" value="pagerank"> Page Rank</label>
+            <label><input type="radio" name="model" value="hits"> HITS</label>
+            <label><input type="radio" name="model" value="combined"> Hybrid</label>
+          </div>
+        </div>
+        <div class="controls-section">
+          <div class="controls-label">Clustering Options</div>
+          <div class="radio-group">
+            <label><input type="radio" name="cluster" value="flat" checked> Flat Clustering</label>
+            <label><input type="radio" name="cluster" value="agglomerative"> Hierarchical Clustering</label>
+          </div>
+        </div>
+        <div class="controls-section">
+          <div class="controls-label">Query Expansion Options</div>
+          <div class="radio-group">
+            <label><input type="radio" name="expansion" value="rocchio" checked> Rocchio</label>
+            <label><input type="radio" name="expansion" value="association"> Association</label>
+            <label><input type="radio" name="expansion" value="metric"> Metric</label>
+            <label><input type="radio" name="expansion" value="scalar"> Scalar</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="tab-relevance">Relevance</button>
+        <button class="tab-btn" data-tab="tab-clusters">Clusters</button>
+        <button class="tab-btn" data-tab="tab-expansion">Expansion</button>
+      </div>
+
+      <!-- Tab panels inside scroll -->
+      <div class="results-scroll">
+        <div id="tab-relevance" class="tab-panel active">
+          <div id="relevance-results" class="state-msg">Enter a query to search.</div>
+        </div>
+        <div id="tab-clusters" class="tab-panel">
+          <div id="cluster-chips"></div>
+          <div id="cluster-results" class="state-msg">Enter a query to see clusters.</div>
+        </div>
+        <div id="tab-expansion" class="tab-panel">
+          <div id="expansion-label" style="display:none" class="expanded-label">
+            <span>Expanded:</span><span id="expansion-terms"></span>
+          </div>
+          <div id="expansion-results" class="state-msg">Enter a query to see expanded results.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MIDDLE: Google -->
+  <div class="col">
+    <div class="col-header">
+      <span class="col-title"><span class="g-dot">●</span> Google</span>
+      <a id="google-link" href="#" target="_blank" class="open-btn" style="display:none">Open ↗</a>
+    </div>
+    <div class="iframe-col">
+      <iframe id="google-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+      <div class="iframe-fallback" id="google-fallback">
+        <div class="fallback-icon">🔍</div>
+        <div class="fallback-text">Google blocked the preview.<br>Click below to open in a new tab.</div>
+        <a id="google-fallback-btn" href="#" target="_blank" class="open-btn">Open Google ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Bing -->
+  <div class="col">
+    <div class="col-header">
+      <span class="col-title"><span class="b-dot">●</span> Bing</span>
+      <a id="bing-link" href="#" target="_blank" class="open-btn" style="display:none">Open ↗</a>
+    </div>
+    <div class="iframe-col">
+      <iframe id="bing-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+      <div class="iframe-fallback" id="bing-fallback">
+        <div class="fallback-icon">🔎</div>
+        <div class="fallback-text">Bing blocked the preview.<br>Click below to open in a new tab.</div>
+        <a id="bing-fallback-btn" href="#" target="_blank" class="open-btn">Open Bing ↗</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+"use strict";
+
+// ── Tab switching ──────────────────────────────────────────────────────────
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.tab).classList.add("active");
+  });
+});
+
+// ── Render helpers ─────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function renderResults(results) {
+  if (!results || results.length === 0)
+    return `<div class="state-msg">No results found.</div>`;
+  return results.map(r => `
+    <div class="result-item">
+      <a href="${esc(r.link||r.url||'#')}" target="_blank" rel="noopener">${esc(r.title||'(no title)')}</a>
+      <div class="result-url">${esc(r.link||r.url||'')}</div>
+      <div class="result-snippet">${esc(r.snippet||'')}</div>
+      ${r.score != null ? `<span class="result-score">${Number(r.score).toFixed(4)}</span>` : ''}
+    </div>`).join("");
+}
+
+function renderClusters(clusters) {
+  if (!clusters || clusters.length === 0) return;
+  const chipsEl = document.getElementById("cluster-chips");
+  chipsEl.innerHTML = clusters.map(c => `
+    <div class="chip" onclick="showCluster(${c.cluster_id}, this)">
+      ${esc(c.label||'Cluster '+c.cluster_id)}
+      <span class="chip-count">${c.documents ? c.documents.length : ''}</span>
+    </div>`).join("");
+  window._clusterData = clusters;
+  // auto-show first
+  if (clusters.length > 0) {
+    const firstChip = chipsEl.querySelector(".chip");
+    if (firstChip) showCluster(clusters[0].cluster_id, firstChip);
+  }
+}
+
+function showCluster(id, chipEl) {
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+  if (chipEl) chipEl.classList.add("active");
+  const c = (window._clusterData||[]).find(x => x.cluster_id === id);
+  if (!c) return;
+  document.getElementById("cluster-results").innerHTML = renderResults(c.documents||[]);
+}
+
+// ── External iframes ───────────────────────────────────────────────────────
+function loadExternal(engine, query) {
+  const urls = {
+    google: `https://www.google.com/search?q=${encodeURIComponent(query)}&igu=1`,
+    bing:   `https://www.bing.com/search?q=${encodeURIComponent(query)}`
+  };
+  const src        = urls[engine];
+  const iframe     = document.getElementById(`${engine}-iframe`);
+  const fallback   = document.getElementById(`${engine}-fallback`);
+  const linkBtn    = document.getElementById(`${engine}-link`);
+  const fallbackBtn= document.getElementById(`${engine}-fallback-btn`);
+
+  linkBtn.href = src; linkBtn.style.display = "inline-flex";
+  fallbackBtn.href = src;
+  fallback.classList.remove("visible");
+  iframe.style.display = "block";
+
+  const timer = setTimeout(() => {
+    iframe.style.display = "none";
+    fallback.classList.add("visible");
+  }, 5000);
+
+  iframe.onload  = () => clearTimeout(timer);
+  iframe.onerror = () => { clearTimeout(timer); iframe.style.display="none"; fallback.classList.add("visible"); };
+  iframe.src = src;
+}
+
+// ── Main search ────────────────────────────────────────────────────────────
+async function runSearch() {
+  const query = document.getElementById("query-input").value.trim();
+  if (!query) return;
+
+  const model     = document.querySelector('input[name="model"]:checked').value;
+  const cluster   = document.querySelector('input[name="cluster"]:checked').value;
+  const expansion = document.querySelector('input[name="expansion"]:checked').value;
+
+  // Loading states
+  document.getElementById("relevance-results").innerHTML = `<div class="state-msg dot-pulse">Searching</div>`;
+  document.getElementById("cluster-results").innerHTML   = `<div class="state-msg dot-pulse">Loading clusters</div>`;
+  document.getElementById("cluster-chips").innerHTML     = "";
+  document.getElementById("expansion-results").innerHTML = `<div class="state-msg dot-pulse">Expanding query</div>`;
+  document.getElementById("expansion-label").style.display = "none";
+
+  // Iframes
+  loadExternal("google", query);
+  loadExternal("bing",   query);
+
+  // Backend call
+  try {
+    const resp = await fetch("/search", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ query, model, cluster, expansion })
+    });
+    const data = await resp.json();
+
+    // Relevance tab
+    document.getElementById("relevance-results").innerHTML =
+      renderResults(data.our_results || data.results || []);
+
+    // Clusters tab
+    if (data.cluster_results && Array.isArray(data.cluster_results)) {
+      if (data.cluster_results[0] && data.cluster_results[0].cluster_id != null) {
+        renderClusters(data.cluster_results);
+      } else {
+        document.getElementById("cluster-results").innerHTML = renderResults(data.cluster_results);
+      }
+    }
+
+    // Expansion tab
+    if (data.expanded_results) {
+      if (data.expanded_query) {
+        document.getElementById("expansion-label").style.display = "block";
+        document.getElementById("expansion-terms").textContent   = data.expanded_query;
+      }
+      document.getElementById("expansion-results").innerHTML = renderResults(data.expanded_results);
+    }
+
+  } catch (e) {
+    document.getElementById("relevance-results").innerHTML =
+      `<div class="state-msg">⚠️ Error: ${esc(e.message)}</div>`;
+  }
+}
+
+// ── Reset ──────────────────────────────────────────────────────────────────
+function resetAll() {
+  document.querySelector('input[name="model"][value="vsm"]').checked = true;
+  document.querySelector('input[name="cluster"][value="flat"]').checked = true;
+  document.querySelector('input[name="expansion"][value="rocchio"]').checked = true;
+}
+
+// ── Enter key ─────────────────────────────────────────────────────────────
+document.getElementById("query-input")
+  .addEventListener("keydown", e => { if (e.key === "Enter") runSearch(); });
+</script>
+</body>
+</html>
