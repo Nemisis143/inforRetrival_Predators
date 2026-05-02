@@ -40,7 +40,8 @@ class PredatorIndexer:
             with open(mapping_path, 'r') as f:
                 for line in f:
                     data = json.loads(line)
-                    self.url_map[f"page_{data['id']}.txt"] = data['url']
+                    # CLEANUP: Ensure the URL in the map is clean
+                    self.url_map[f"page_{data['id']}.txt"] = data['url'].strip()
         print(f"Mapped {len(self.url_map)} file IDs to URLs.")
 
     def load_link_scores(self, scores_path):
@@ -48,7 +49,8 @@ class PredatorIndexer:
         if os.path.exists(scores_path):
             with open(scores_path, 'rb') as f:
                 data = pickle.load(f)
-                self.pagerank = data.get('pagerank', {})
+                # CLEANUP: Lowercase all PageRank URLs so they match fused_search
+                self.pagerank = {k.lower().strip(): v for k, v in data.get('pagerank', {}).items()}
         print(f"Loaded PageRank for {len(self.pagerank)} URLs.")
 
     def save_to_disk(self):
@@ -144,3 +146,22 @@ class PredatorIndexer:
                 })
         
         return sorted(final_results, key=lambda x: x['score'], reverse=True)[:top_n]
+
+
+if __name__ == "__main__":
+    # 1. Initialize and load your saved data
+    engine = PredatorIndexer(os.path.join('data', 'pages'))
+    engine.load_from_disk()
+    engine.load_mapping(os.path.join('data', 'url_mapping.jsonl'))
+    engine.load_link_scores('link_analysis_scores.pkl')
+
+    # 2. Run the exact query Khushi tested
+    test_query = "african lion"
+    print(f"\n--- Testing Query: '{test_query}' ---")
+    print(f"Index size: {len(engine.index)} terms")
+    results = engine.fused_search(test_query, top_n=5)
+
+    # 3. Print the exact scores the UI is getting
+    for i, res in enumerate(results, 1):
+        print(f"{i}. {res['url']}")
+        print(f"   Hybrid Score: {res['score']:.4f} | VSM (TF-IDF): {res['tf_idf']:.4f}\n")
