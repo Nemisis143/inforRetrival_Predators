@@ -40,8 +40,8 @@ class PredatorIndexer:
             with open(mapping_path, 'r') as f:
                 for line in f:
                     data = json.loads(line)
-                    # Maps "page_1.txt" to its URL
-                    self.url_map[f"page_{data['id']}.txt"] = data['url']
+                    # CLEANUP: Ensure the URL in the map is clean
+                    self.url_map[f"page_{data['id']}.txt"] = data['url'].strip()
         print(f"Mapped {len(self.url_map)} file IDs to URLs.")
 
     def load_link_scores(self, scores_path):
@@ -50,7 +50,8 @@ class PredatorIndexer:
         if os.path.exists(scores_path):
             with open(scores_path, 'rb') as f:
                 data = pickle.load(f)
-                self.pagerank = data.get('pagerank', {})
+                # CLEANUP: Lowercase all PageRank URLs so they match fused_search
+                self.pagerank = {k.lower().strip(): v for k, v in data.get('pagerank', {}).items()}
         print(f"Loaded PageRank for {len(self.pagerank)} URLs.")
 
     def save_to_disk(self):
@@ -116,44 +117,63 @@ class PredatorIndexer:
         
         # 2. Add PageRank component (The Fusion)
         final_results = []
+        num_query_terms = len(set(query_terms))
+        seen_urls = set() # <--- ADDED: This keeps track of what we've already shown
+        
         for doc_id, tf_score in tfidf_scores.items():
-            url = self.url_map.get(doc_id)
-            pr_score = self.pagerank.get(url, 0)
+            # Get original URL to show on the UI, and a clean lowercase one for tracking
+            original_url = self.url_map.get(doc_id, doc_id)
+            clean_url = original_url.lower().strip()
             
-            # Weighting: TF-IDF + (PageRank * weight)
-            # We use a weight of 1000 because PR values are tiny decimals
-            total_score = tf_score + (pr_score * 1000)
+            # <--- ADDED: If we have seen this exact URL already, skip to the next one!
+            if clean_url in seen_urls:
+                continue
+            seen_urls.add(clean_url)
             
-            final_results.append({
-                "url": url if url else doc_id,
-                "score": total_score,
-                "tf_idf": tf_score,
-                "page_rank": pr_score
-            })
+            pr_score = self.pagerank.get(clean_url, 0)
+            
+            # EXPONENTIAL COORDINATION FACTOR
+            coord_factor = (len(coordination[doc_id]) / num_query_terms) ** 4
+            
+            # DEEP-LINK BOOSTING & NOISE FILTERING
+            url_weight = 1.0
+            
+            # 2. Penalty for Homepages (too broad)
+            if clean_url.count("/") <= 3: # e.g., http://fnai.org/ or http://fnai.org/home
+                url_weight *= 0.3
+                
+            # 3. Boost for "Deep" content pages
+            if clean_url.count("/") >= 5: # e.g., http://fnai.org/species/animals/panther.php
+                url_weight *= 2.0
+            
+            total_score = (tf_score + (pr_score * 1000)) * coord_factor * url_weight
+            
+            if total_score > 0:
+                final_results.append({
+                    "url": original_url,  # Keep the original casing for Khushi's UI
+                    "score": total_score,
+                    "tf_idf": tf_score,
+                    "coordination": coord_factor,
+                    "page_rank": pr_score
+                })
         
         return sorted(final_results, key=lambda x: x['score'], reverse=True)[:top_n]
 
-# Example usage
+
 if __name__ == "__main__":
-    # Paths
-    PAGES_PATH = os.path.join('data', 'pages')
-    MAPPING_PATH = os.path.join('data', 'url_mapping.jsonl') # Update this filename if needed
-    SCORES_PATH = 'link_analysis_scores.pkl'
-    
-    niki_engine = PredatorIndexer(PAGES_PATH)
-    
-    # Run/Load Index
-    niki_engine.run_incremental_indexing()
-    
-    # Load Fusion Data
-    niki_engine.load_mapping(MAPPING_PATH)
-    niki_engine.load_link_scores(SCORES_PATH)
-    
-    # Final Test
-    query = "lion"
-    print(f"\n--- Fused Search Results for: '{query}' ---")
-    results = niki_engine.fused_search(query)
-    
+    # 1. Initialize and load your saved data
+    engine = PredatorIndexer(os.path.join('data', 'pages'))
+    engine.load_from_disk()
+    engine.load_mapping(os.path.join('data', 'url_mapping.jsonl'))
+    engine.load_link_scores('link_analysis_scores.pkl')
+
+    # 2. Run the exact query Khushi tested
+    test_query = "african lion"
+    print(f"\n--- Testing Query: '{test_query}' ---")
+    print(f"Index size: {len(engine.index)} terms")
+    results = engine.fused_search(test_query, top_n=5)
+
+    # 3. Print the exact scores the UI is getting
     for i, res in enumerate(results, 1):
         print(f"{i}. {res['url']}")
-        print(f"   [Final Score: {res['score']:.4f}] (TF-IDF: {res['tf_idf']:.2f}, PR: {res['page_rank']:.6f})")
+        print(f"   Hybrid Score: {res['score']:.4f} | VSM (TF-IDF): {res['tf_idf']:.4f}\n")
