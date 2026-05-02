@@ -1,0 +1,407 @@
+{
+    "African Lion hunting": {
+        "original_query": "African Lion hunting",
+        "results": {
+            "base_tfidf": [
+                {
+                    "url": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC5658145",
+                    "title": "Questionnaire survey of the pan-African trade in lion body parts - PMC",
+                    "snippet": "Questionnaire survey of the pan-African trade in lion body parts - PMC Skip to main content An official website of the United States government Here's how you know Here's how you know Official website...",
+                    "score": 644.4141237360152
+                },
+                {
+                    "url": "https://link.springer.com/doi/10.1007/s10531-012-0381-4",
+                    "title": "The size of savannah Africa: a lion\u2019s (Panthera leo) view | Biodiversity and Conservation | Springer",
+                    "snippet": "The size of savannah Africa: a lion\u2019s (Panthera leo) view | Biodiversity and Conservation | Springer Nature Link Skip to main content Advertisement Account Menu Find a journal Publish with us Track yo...",
+                    "score": 643.9611047920247
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/100614-neanderthals-cave-lions-predators-science",
+                    "title": "Prehistoric Europeans Hunted, Ate Lion? | National Geographic",
+                    "snippet": "Prehistoric Europeans Hunted, Ate Lion? | National Geographic Cave lion bones found recently in Spain. Photograph courtesy Blasco et al.Prehistoric Europeans Hunted, Ate Lion?Knife-scarred bones sugge...",
+                    "score": 622.6182237587624
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/lions-targeted-for-illegal-trade",
+                    "title": "Inside the illegal lion trade | National Geographic",
+                    "snippet": "Inside the illegal lion trade | National Geographic ANIMALSInside the illegal lion tradeGrowing demand for lion bones, skins, teeth, and claws poses a serious new threat to the species.Students gather...",
+                    "score": 588.9939420305828
+                },
+                {
+                    "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0185996#main-content",
+                    "title": "A roaring trade? The legal trade in Panthera leo bones from Africa to East-Southeast Asia | PLOS One",
+                    "snippet": "A roaring trade? The legal trade in Panthera leo bones from Africa to East-Southeast Asia | PLOS One Skip to main content Advertisement PLOS One Publish Submissions Getting Started Submission Guidelin...",
+                    "score": 574.0264598782456
+                }
+            ],
+            "with_pagerank": [
+                {
+                    "url": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC5658145",
+                    "title": "Questionnaire survey of the pan-African trade in lion body parts - PMC",
+                    "snippet": "Questionnaire survey of the pan-African trade in lion body parts - PMC Skip to main content An official website of the United States government Here's how you know Here's how you know Official website...",
+                    "score": 644.4141237360152
+                },
+                {
+                    "url": "https://link.springer.com/doi/10.1007/s10531-012-0381-4",
+                    "title": "The size of savannah Africa: a lion\u2019s (Panthera leo) view | Biodiversity and Conservation | Springer",
+                    "snippet": "The size of savannah Africa: a lion\u2019s (Panthera leo) view | Biodiversity and Conservation | Springer Nature Link Skip to main content Advertisement Account Menu Find a journal Publish with us Track yo...",
+                    "score": 643.9624515461252
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/100614-neanderthals-cave-lions-predators-science",
+                    "title": "Prehistoric Europeans Hunted, Ate Lion? | National Geographic",
+                    "snippet": "Prehistoric Europeans Hunted, Ate Lion? | National Geographic Cave lion bones found recently in Spain. Photograph courtesy Blasco et al.Prehistoric Europeans Hunted, Ate Lion?Knife-scarred bones sugge...",
+                    "score": 622.6192603382209
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/lions-targeted-for-illegal-trade",
+                    "title": "Inside the illegal lion trade | National Geographic",
+                    "snippet": "Inside the illegal lion trade | National Geographic ANIMALSInside the illegal lion tradeGrowing demand for lion bones, skins, teeth, and claws poses a serious new threat to the species.Students gather...",
+                    "score": 589.001686174676
+                },
+                {
+                    "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0185996",
+                    "title": "A roaring trade? The legal trade in Panthera leo bones from Africa to East-Southeast Asia | PLOS One",
+                    "snippet": "A roaring trade? The legal trade in Panthera leo bones from Africa to East-Southeast Asia | PLOS One Skip to main content Advertisement PLOS One Publish Submissions Getting Started Submission Guidelin...",
+                    "score": 574.0275473721583
+                }
+            ],
+            "with_rocchio": [
+                {
+                    "url": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC5658145",
+                    "title": "Questionnaire survey of the pan-African trade in lion body parts - PMC",
+                    "snippet": "Questionnaire survey of the pan-African trade in lion body parts - PMC Skip to main content An official website of the United States government Here's how you know Here's how you know Official website...",
+                    "score": 644.4141237360152
+                },
+                {
+                    "url": "https://link.springer.com/doi/10.1007/s10531-012-0381-4",
+                    "title": "The size of savannah Africa: a lion\u2019s (Panthera leo) view | Biodiversity and Conservation | Springer",
+                    "snippet": "The size of savannah Africa: a lion\u2019s (Panthera leo) view | Biodiversity and Conservation | Springer Nature Link Skip to main content Advertisement Account Menu Find a journal Publish with us Track yo...",
+                    "score": 643.9624515461252
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/100614-neanderthals-cave-lions-predators-science",
+                    "title": "Prehistoric Europeans Hunted, Ate Lion? | National Geographic",
+                    "snippet": "Prehistoric Europeans Hunted, Ate Lion? | National Geographic Cave lion bones found recently in Spain. Photograph courtesy Blasco et al.Prehistoric Europeans Hunted, Ate Lion?Knife-scarred bones sugge...",
+                    "score": 622.6192603382209
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/lions-targeted-for-illegal-trade",
+                    "title": "Inside the illegal lion trade | National Geographic",
+                    "snippet": "Inside the illegal lion trade | National Geographic ANIMALSInside the illegal lion tradeGrowing demand for lion bones, skins, teeth, and claws poses a serious new threat to the species.Students gather...",
+                    "score": 589.001686174676
+                },
+                {
+                    "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0185996",
+                    "title": "A roaring trade? The legal trade in Panthera leo bones from Africa to East-Southeast Asia | PLOS One",
+                    "snippet": "A roaring trade? The legal trade in Panthera leo bones from Africa to East-Southeast Asia | PLOS One Skip to main content Advertisement PLOS One Publish Submissions Getting Started Submission Guidelin...",
+                    "score": 574.0275473721583
+                }
+            ],
+            "with_clustering": [
+                {
+                    "url": "http://www.ncbi.nlm.nih.gov/pmc/articles/PMC5658145",
+                    "title": "Questionnaire survey of the pan-African trade in lion body parts - PMC",
+                    "snippet": "Questionnaire survey of the pan-African trade in lion body parts - PMC Skip to main content An official website of the United States government Here's how you know Here's how you know Official website...",
+                    "score": 40.27588273350095
+                },
+                {
+                    "url": "https://link.springer.com/doi/10.1007/s10531-012-0381-4",
+                    "title": "The size of savannah Africa: a lion\u2019s (Panthera leo) view | Biodiversity and Conservation | Springer",
+                    "snippet": "The size of savannah Africa: a lion\u2019s (Panthera leo) view | Biodiversity and Conservation | Springer Nature Link Skip to main content Advertisement Account Menu Find a journal Publish with us Track yo...",
+                    "score": 40.247653221632824
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/100614-neanderthals-cave-lions-predators-science",
+                    "title": "Prehistoric Europeans Hunted, Ate Lion? | National Geographic",
+                    "snippet": "Prehistoric Europeans Hunted, Ate Lion? | National Geographic Cave lion bones found recently in Spain. Photograph courtesy Blasco et al.Prehistoric Europeans Hunted, Ate Lion?Knife-scarred bones sugge...",
+                    "score": 38.913703771138806
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/lions-targeted-for-illegal-trade",
+                    "title": "Inside the illegal lion trade | National Geographic",
+                    "snippet": "Inside the illegal lion trade | National Geographic ANIMALSInside the illegal lion tradeGrowing demand for lion bones, skins, teeth, and claws poses a serious new threat to the species.Students gather...",
+                    "score": 36.81260538591725
+                },
+                {
+                    "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0185996",
+                    "title": "A roaring trade? The legal trade in Panthera leo bones from Africa to East-Southeast Asia | PLOS One",
+                    "snippet": "A roaring trade? The legal trade in Panthera leo bones from Africa to East-Southeast Asia | PLOS One Skip to main content Advertisement PLOS One Publish Submissions Getting Started Submission Guidelin...",
+                    "score": 35.876721710759895
+                }
+            ]
+        },
+        "expanded_query_rocchio": "African Lion hunting ",
+        "expanded_query_cluster": "African Lion hunting neolithic anura palaeolithic"
+    },
+    "Great White Shark migration": {
+        "original_query": "Great White Shark migration",
+        "results": {
+            "base_tfidf": [
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/how-does-this-shark-town-cope-with-its-summer-visitors-",
+                    "title": "Great White Sharks Invade This Town Every Summer | National Geographic",
+                    "snippet": "Great White Sharks Invade This Town Every Summer | National Geographic Gray seals have been increasing in number along Cape Cod, attracting great white sharks. Photograph by Brian Skerry, National Geo...",
+                    "score": 432.43606412534973
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/related/a61d5b92-5c44-3eb2-8ca3-bfe6499ef9b5/great-white-shark",
+                    "title": "Great white shark | National Geographic",
+                    "snippet": "Great white shark | National Geographic Great white sharkWatch orcas team up to hunt great white sharksAnimalsWatch orcas team up to hunt great white sharksWatch orcas team up to hunt great white shar...",
+                    "score": 394.01672474545705
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/magazine/article/great-white-shark-research-population-behavior",
+                    "title": "Why great white sharks are still a mystery to us | National Geographic",
+                    "snippet": "Why great white sharks are still a mystery to us | National Geographic PremiumMAGAZINESHARKFESTWhy great white sharks are still a mystery to usThanks to Jaws, they're the ocean's most iconic and feare...",
+                    "score": 385.6657937933794
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/premium/article/simon-jekyll-great-white-sharks-4000-mile-journey-together",
+                    "title": "Meet Simon and Jekyll, two great white sharks on a 4,000-mile journey together. Are they \u2026 friends? ",
+                    "snippet": "Meet Simon and Jekyll, two great white sharks on a 4,000-mile journey together. Are they \u2026 friends? | National Geographic Jekyll the shark is released shortly after being tagged for tracking. The anim...",
+                    "score": 323.4295760709923
+                },
+                {
+                    "url": "https://www.nhm.ac.uk/discover/great-white-shark-man-eater-or-marine-marvel.html",
+                    "title": "Great white sharks: Dangerous man-eaters or marine marvels? | Natural History MuseumSkip to contentS",
+                    "snippet": "Great white sharks: Dangerous man-eaters or marine marvels? | Natural History MuseumSkip to contentSearchMembershipDonateVisitWhat\u2019s onTake partJoin and supportShopSchoolsOur scienceVisitWhat\u2019s onTake...",
+                    "score": 290.35502122636996
+                }
+            ],
+            "with_pagerank": [
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/how-does-this-shark-town-cope-with-its-summer-visitors-",
+                    "title": "Great White Sharks Invade This Town Every Summer | National Geographic",
+                    "snippet": "Great White Sharks Invade This Town Every Summer | National Geographic Gray seals have been increasing in number along Cape Cod, attracting great white sharks. Photograph by Brian Skerry, National Geo...",
+                    "score": 432.4371013560648
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/related/a61d5b92-5c44-3eb2-8ca3-bfe6499ef9b5/great-white-shark",
+                    "title": "Great white shark | National Geographic",
+                    "snippet": "Great white shark | National Geographic Great white sharkWatch orcas team up to hunt great white sharksAnimalsWatch orcas team up to hunt great white sharksWatch orcas team up to hunt great white shar...",
+                    "score": 394.01720978791525
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/magazine/article/great-white-shark-research-population-behavior",
+                    "title": "Why great white sharks are still a mystery to us | National Geographic",
+                    "snippet": "Why great white sharks are still a mystery to us | National Geographic PremiumMAGAZINESHARKFESTWhy great white sharks are still a mystery to usThanks to Jaws, they're the ocean's most iconic and feare...",
+                    "score": 385.6669229895469
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/premium/article/simon-jekyll-great-white-sharks-4000-mile-journey-together",
+                    "title": "Meet Simon and Jekyll, two great white sharks on a 4,000-mile journey together. Are they \u2026 friends? ",
+                    "snippet": "Meet Simon and Jekyll, two great white sharks on a 4,000-mile journey together. Are they \u2026 friends? | National Geographic Jekyll the shark is released shortly after being tagged for tracking. The anim...",
+                    "score": 323.43072744055326
+                },
+                {
+                    "url": "https://www.nhm.ac.uk/discover/great-white-shark-man-eater-or-marine-marvel.html",
+                    "title": "Great white sharks: Dangerous man-eaters or marine marvels? | Natural History MuseumSkip to contentS",
+                    "snippet": "Great white sharks: Dangerous man-eaters or marine marvels? | Natural History MuseumSkip to contentSearchMembershipDonateVisitWhat\u2019s onTake partJoin and supportShopSchoolsOur scienceVisitWhat\u2019s onTake...",
+                    "score": 290.35555436818584
+                }
+            ],
+            "with_rocchio": [
+                {
+                    "url": "https://www.nationalgeographic.com/related/a61d5b92-5c44-3eb2-8ca3-bfe6499ef9b5/great-white-shark",
+                    "title": "Great white shark | National Geographic",
+                    "snippet": "Great white shark | National Geographic Great white sharkWatch orcas team up to hunt great white sharksAnimalsWatch orcas team up to hunt great white sharksWatch orcas team up to hunt great white shar...",
+                    "score": 901.0149749387109
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/how-does-this-shark-town-cope-with-its-summer-visitors-",
+                    "title": "Great White Sharks Invade This Town Every Summer | National Geographic",
+                    "snippet": "Great White Sharks Invade This Town Every Summer | National Geographic Gray seals have been increasing in number along Cape Cod, attracting great white sharks. Photograph by Brian Skerry, National Geo...",
+                    "score": 474.63853536421306
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/premium/article/simon-jekyll-great-white-sharks-4000-mile-journey-together",
+                    "title": "Meet Simon and Jekyll, two great white sharks on a 4,000-mile journey together. Are they \u2026 friends? ",
+                    "snippet": "Meet Simon and Jekyll, two great white sharks on a 4,000-mile journey together. Are they \u2026 friends? | National Geographic Jekyll the shark is released shortly after being tagged for tracking. The anim...",
+                    "score": 126.63509633702095
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/culture/article/marthas-vineyard-jaws-movie-legacy",
+                    "title": "Martha's Vineyard locals reflect on 'Jaws' 50 years later | National Geographic",
+                    "snippet": "Martha's Vineyard locals reflect on 'Jaws' 50 years later | National Geographic HISTORY & CULTUREFood fights, fake blood, obsessed fans: When Jaws invaded Martha\u2019s Vineyard50 years after the legendary...",
+                    "score": 114.24568599629885
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/related/ead4f43a-e785-357b-a4ca-78413886d264/sharks",
+                    "title": "Sharks | National Geographic",
+                    "snippet": "Sharks | National Geographic SharksShark discovered in Antarctic waters has survival superpowersAnimalsShark discovered in Antarctic waters has survival superpowersShark discovered in Antarctic waters...",
+                    "score": 113.28793817325463
+                }
+            ],
+            "with_clustering": [
+                {
+                    "url": "https://www.nationalgeographic.com/history/history-magazine/article/king-herod-judaea-holy-land-rome-new-testament",
+                    "title": "How King Herod transformed the Holy Land | National Geographic",
+                    "snippet": "How King Herod transformed the Holy Land | National Geographic PremiumHISTORY MAGAZINEHerod I: The controversial king who transformed the Holy LandVillain of the Christmas story, King Herod realized a...",
+                    "score": 86.30824927242716
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/how-does-this-shark-town-cope-with-its-summer-visitors-",
+                    "title": "Great White Sharks Invade This Town Every Summer | National Geographic",
+                    "snippet": "Great White Sharks Invade This Town Every Summer | National Geographic Gray seals have been increasing in number along Cape Cod, attracting great white sharks. Photograph by Brian Skerry, National Geo...",
+                    "score": 46.107412722679115
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/related/a61d5b92-5c44-3eb2-8ca3-bfe6499ef9b5/great-white-shark",
+                    "title": "Great white shark | National Geographic",
+                    "snippet": "Great white shark | National Geographic Great white sharkWatch orcas team up to hunt great white sharksAnimalsWatch orcas team up to hunt great white sharksWatch orcas team up to hunt great white shar...",
+                    "score": 42.01099779496305
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/magazine/article/great-white-shark-research-population-behavior",
+                    "title": "Why great white sharks are still a mystery to us | National Geographic",
+                    "snippet": "Why great white sharks are still a mystery to us | National Geographic PremiumMAGAZINESHARKFESTWhy great white sharks are still a mystery to usThanks to Jaws, they're the ocean's most iconic and feare...",
+                    "score": 41.12067150575759
+                },
+                {
+                    "url": "https://www.nationalgeographic.com/premium/article/simon-jekyll-great-white-sharks-4000-mile-journey-together",
+                    "title": "Meet Simon and Jekyll, two great white sharks on a 4,000-mile journey together. Are they \u2026 friends? ",
+                    "snippet": "Meet Simon and Jekyll, two great white sharks on a 4,000-mile journey together. Are they \u2026 friends? | National Geographic Jekyll the shark is released shortly after being tagged for tracking. The anim...",
+                    "score": 34.484908881624996
+                }
+            ]
+        },
+        "expanded_query_rocchio": "Great White Shark migration taser sharksanimalswatch stun vineyard jaws",
+        "expanded_query_cluster": "Great White Shark migration jews romans herod"
+    },
+    "Apex predators": {
+        "original_query": "Apex predators",
+        "results": {
+            "base_tfidf": [
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/coyote-predators-steal-prey-mountain-lions-wolves",
+                    "title": "Coyotes risk it all to steal from mountain lions | National Geographic",
+                    "snippet": "Coyotes risk it all to steal from mountain lions | National Geographic A coyote stands alert in deep snow. These wily predators not uncommonly try to steal prey caught by mountain lions\u2014at considerabl...",
+                    "score": 321.1133660009726
+                },
+                {
+                    "url": "https://education.nationalgeographic.org/resource/reintroduction-top-predator/",
+                    "title": "Reintroduction of the Top PredatorEducationSign InMenuDonateARTICLEleveledARTICLEleveledReintroducti",
+                    "snippet": "Reintroduction of the Top PredatorEducationSign InMenuDonateARTICLEleveledARTICLEleveledReintroduction of the Top PredatorReintroduction of the Top PredatorThe reintroduction of top predators into eco...",
+                    "score": 249.80007895121506
+                },
+                {
+                    "url": "https://www.detpress.com/natgeo/shows/shark-quest-hunt-for-the-apex-predator/#main",
+                    "title": "National Geographic",
+                    "snippet": "National Geographic Skip to content Shows Releases Contacts Screeners Press Sites Sign In Sign Up Sign Up Sign In Press Sites Close Shark Quest: Hunt for the Apex Predator Sharkfest 2025Premieres July...",
+                    "score": 203.73217503245547
+                },
+                {
+                    "url": "https://www.detpress.com/natgeo/shows/shark-quest-hunt-for-the-apex-predator/#press-sites",
+                    "title": "National Geographic",
+                    "snippet": "National Geographic Skip to content Shows Releases Contacts Screeners Press Sites Sign In Sign Up Sign Up Sign In Press Sites Close Shark Quest: Hunt for the Apex Predator Sharkfest 2025Premieres July...",
+                    "score": 203.73217503245547
+                },
+                {
+                    "url": "https://www.detpress.com/natgeo/shows/shark-quest-hunt-for-the-apex-predator/",
+                    "title": "National Geographic",
+                    "snippet": "National Geographic Skip to content Shows Releases Contacts Screeners Press Sites Sign In Sign Up Sign Up Sign In Press Sites Close Shark Quest: Hunt for the Apex Predator Sharkfest 2025Premieres July...",
+                    "score": 203.73217503245547
+                }
+            ],
+            "with_pagerank": [
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/coyote-predators-steal-prey-mountain-lions-wolves",
+                    "title": "Coyotes risk it all to steal from mountain lions | National Geographic",
+                    "snippet": "Coyotes risk it all to steal from mountain lions | National Geographic A coyote stands alert in deep snow. These wily predators not uncommonly try to steal prey caught by mountain lions\u2014at considerabl...",
+                    "score": 321.1144211419512
+                },
+                {
+                    "url": "https://education.nationalgeographic.org/resource/reintroduction-top-predator/",
+                    "title": "Reintroduction of the Top PredatorEducationSign InMenuDonateARTICLEleveledARTICLEleveledReintroducti",
+                    "snippet": "Reintroduction of the Top PredatorEducationSign InMenuDonateARTICLEleveledARTICLEleveledReintroduction of the Top PredatorReintroduction of the Top PredatorThe reintroduction of top predators into eco...",
+                    "score": 249.8011421564949
+                },
+                {
+                    "url": "https://www.detpress.com/natgeo/shows/shark-quest-hunt-for-the-apex-predator/",
+                    "title": "National Geographic",
+                    "snippet": "National Geographic Skip to content Shows Releases Contacts Screeners Press Sites Sign In Sign Up Sign Up Sign In Press Sites Close Shark Quest: Hunt for the Apex Predator Sharkfest 2025Premieres July...",
+                    "score": 203.73329897439305
+                },
+                {
+                    "url": "https://www.detpress.com/natgeo/shows/shark-quest-hunt-for-the-apex-predator/#main",
+                    "title": "National Geographic",
+                    "snippet": "National Geographic Skip to content Shows Releases Contacts Screeners Press Sites Sign In Sign Up Sign Up Sign In Press Sites Close Shark Quest: Hunt for the Apex Predator Sharkfest 2025Premieres July...",
+                    "score": 203.7332399135197
+                },
+                {
+                    "url": "https://www.detpress.com/natgeo/shows/shark-quest-hunt-for-the-apex-predator/#press-sites",
+                    "title": "National Geographic",
+                    "snippet": "National Geographic Skip to content Shows Releases Contacts Screeners Press Sites Sign In Sign Up Sign Up Sign In Press Sites Close Shark Quest: Hunt for the Apex Predator Sharkfest 2025Premieres July...",
+                    "score": 203.7332399135197
+                }
+            ],
+            "with_rocchio": [
+                {
+                    "url": "https://www.nationalgeographic.com/animals/article/coyote-predators-steal-prey-mountain-lions-wolves",
+                    "title": "Coyotes risk it all to steal from mountain lions | National Geographic",
+                    "snippet": "Coyotes risk it all to steal from mountain lions | National Geographic A coyote stands alert in deep snow. These wily predators not uncommonly try to steal prey caught by mountain lions\u2014at considerabl...",
+                    "score": 321.1144211419512
+                },
+                {
+                    "url": "https://education.nationalgeographic.org/resource/reintroduction-top-predator/",
+                    "title": "Reintroduction of the Top PredatorEducationSign InMenuDonateARTICLEleveledARTICLEleveledReintroducti",
+                    "snippet": "Reintroduction of the Top PredatorEducationSign InMenuDonateARTICLEleveledARTICLEleveledReintroduction of the Top PredatorReintroduction of the Top PredatorThe reintroduction of top predators into eco...",
+                    "score": 249.8011421564949
+                },
+                {
+                    "url": "https://www.detpress.com/natgeo/shows/shark-quest-hunt-for-the-apex-predator/",
+                    "title": "National Geographic",
+                    "snippet": "National Geographic Skip to content Shows Releases Contacts Screeners Press Sites Sign In Sign Up Sign Up Sign In Press Sites Close Shark Quest: Hunt for the Apex Predator Sharkfest 2025Premieres July...",
+                    "score": 203.73329897439305
+                },
+                {
+                    "url": "https://www.detpress.com/natgeo/shows/shark-quest-hunt-for-the-apex-predator/#main",
+                    "title": "National Geographic",
+                    "snippet": "National Geographic Skip to content Shows Releases Contacts Screeners Press Sites Sign In Sign Up Sign Up Sign In Press Sites Close Shark Quest: Hunt for the Apex Predator Sharkfest 2025Premieres July...",
+                    "score": 203.7332399135197
+                },
+                {
+                    "url": "https://www.detpress.com/natgeo/shows/shark-quest-hunt-for-the-apex-predator/#press-sites",
+                    "title": "National Geographic",
+                    "snippet": "National Geographic Skip to content Shows Releases Contacts Screeners Press Sites Sign In Sign Up Sign Up Sign In Press Sites Close Shark Quest: Hunt for the Apex Predator Sharkfest 2025Premieres July...",
+                    "score": 203.7332399135197
+                }
+            ],
+            "with_clustering": [
+                {
+                    "url": "https://www.nature.com/articles/s41467-023-44682-1",
+                    "title": "Polar bear energetic and behavioral strategies on land with implications for surviving the ice-free ",
+                    "snippet": "Polar bear energetic and behavioral strategies on land with implications for surviving the ice-free period | Nature Communications Skip to main content Thank you for visiting nature.com. You are using...",
+                    "score": 63.535310104733064
+                },
+                {
+                    "url": "https://www.nature.com/articles/s41467-023-44682-1#search-menu",
+                    "title": "Polar bear energetic and behavioral strategies on land with implications for surviving the ice-free ",
+                    "snippet": "Polar bear energetic and behavioral strategies on land with implications for surviving the ice-free period | Nature Communications Skip to main content Thank you for visiting nature.com. You are using...",
+                    "score": 63.53513728882486
+                },
+                {
+                    "url": "https://www.nature.com/articles/s41467-023-44682-1#explore",
+                    "title": "Polar bear energetic and behavioral strategies on land with implications for surviving the ice-free ",
+                    "snippet": "Polar bear energetic and behavioral strategies on land with implications for surviving the ice-free period | Nature Communications Skip to main content Thank you for visiting nature.com. You are using...",
+                    "score": 63.53513728882486
+                },
+                {
+                    "url": "https://www.nature.com/articles/s41467-023-44682-1#content",
+                    "title": "Polar bear energetic and behavioral strategies on land with implications for surviving the ice-free ",
+                    "snippet": "Polar bear energetic and behavioral strategies on land with implications for surviving the ice-free period | Nature Communications Skip to main content Thank you for visiting nature.com. You are using...",
+                    "score": 63.53513728882486
+                },
+                {
+                    "url": "https://www.nature.com/articles/s41467-023-44682-1#about-the-journal",
+                    "title": "Polar bear energetic and behavioral strategies on land with implications for surviving the ice-free ",
+                    "snippet": "Polar bear energetic and behavioral strategies on land with implications for surviving the ice-free period | Nature Communications Skip to main content Thank you for visiting nature.com. You are using...",
+                    "score": 63.53513728882486
+                }
+            ]
+        },
+        "expanded_query_rocchio": "Apex predators ",
+        "expanded_query_cluster": "Apex predators dee subadult svalbard"
+    }
+}

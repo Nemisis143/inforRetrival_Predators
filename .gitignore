@@ -1,3 +1,19 @@
+# Data and Index files (Too large for Git)
 data/
 *.pkl
-*.pyc
+*.pkl.gz
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# Local results and temporary JSONs
+current_query_results.json
+last_query_result.json
+
+# OS specific files
+.DS_Store
+Thumbs.db

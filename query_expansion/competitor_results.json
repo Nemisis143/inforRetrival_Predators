@@ -1,0 +1,44 @@
+{
+    "African Lion hunting": [
+        {
+            "engine": "Google/Bing",
+            "title": "How African Lions Hunt - Lion Alert",
+            "url": "https://www.lionalert.org/predatory-behavior/",
+            "snippet": "Detailed breakdown of predatory behavior, including stalking roles, group coordination, and killing techniques."
+        },
+        {
+            "engine": "Google/Bing",
+            "title": "Lion Hunting Strategies - Kruger Park",
+            "url": "http://www.krugerpark.co.za/Kruger_Park_Wildlife_Guide-travel/lion-hunting-strategies.html",
+            "snippet": "Discusses collaborative vs. solitary hunting, the importance of the element of surprise, and how lions kill prey."
+        }
+    ],
+    "Great White Shark migration": [
+        {
+            "engine": "Google/Bing",
+            "title": "Great white shark - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Great_white_shark",
+            "snippet": "Details the migratory nature of white sharks globally. In the northeastern Pacific, they travel between the US/Mexico coast and Hawaii."
+        },
+        {
+            "engine": "Google/Bing",
+            "title": "Landmark Study of Atlantic White Shark Movements - OCEARCH",
+            "url": "https://www.ocearch.org/",
+            "snippet": "Reports that Atlantic white sharks make predictable annual migrations between their northern range and warmer southern waters."
+        }
+    ],
+    "Apex predators": [
+        {
+            "engine": "Google/Bing",
+            "title": "Apex predator | Definition, Examples, & Facts - Britannica",
+            "url": "https://www.britannica.com/science/apex-predator",
+            "snippet": "Apex predator, in ecology, any flesh-eating animal that has no natural predators or enemies. Holding the top rank in a food chain."
+        },
+        {
+            "engine": "Google/Bing",
+            "title": "Apex Predator - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Apex_predator",
+            "snippet": "An apex predator, also known as a top predator or superpredator, is a predator at the top of a food chain without natural predators of their own."
+        }
+    ]
+}
